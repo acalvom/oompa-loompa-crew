@@ -8,9 +8,6 @@ export const Home = () => {
 
   return (
     <Layout>
-      <div className="bg-grey-light p-4 my-4">
-        <h1 className="text-4xl font-bold">Oompa Loompa Crew Home</h1>
-      </div>
       <div className="rounded border-2 border-yellow-500">
         <div className="flex flex-row p-2 gap-2 justify-center">
           <button
