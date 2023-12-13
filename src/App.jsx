@@ -1,8 +1,6 @@
 import { useAppDispatch, useAppSelector } from './hooks/store'
 import { decrement, increment } from './redux/counter/counterSlice'
 
-import './App.css'
-
 export const App = () => {
   const dispatch = useAppDispatch()
   const count = useAppSelector((state) => state.counter.value)
