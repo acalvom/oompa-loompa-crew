@@ -11,7 +11,8 @@
     "preview": "vite preview",
     "prepare": "husky install",
     "test": "vitest",
-    "cy:open": "cypress open"
+    "cy:open": "cypress open",
+    "cy:run": "cypress run"
   },
   "dependencies": {
     "@redux-devtools/extension": "^3.3.0",
