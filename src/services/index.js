@@ -1,1 +1,1 @@
-export { getOompas } from './oompas'
+export { getPageOompas } from './oompas'
