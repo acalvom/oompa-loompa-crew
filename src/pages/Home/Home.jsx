@@ -1,19 +1,35 @@
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import { useAppDispatch, useAppSelector } from '@/hooks/store'
-import { initOompas } from '@/redux/oompas/oompasSlice'
-import { getOompas } from '@/services'
+import { getOompas } from '@/redux/oompas/oompasSlice'
+import { getPageOompas } from '@/services'
 import { Layout } from '@/layout'
 import { Grid } from '@/components/Grid'
+import { setNextPage, setPreviousPage } from '@/redux/pagination/paginationSlice'
 
 export const Home = () => {
   const dispatch = useAppDispatch()
   const oompas = useAppSelector((state) => state.oompas)
+  const { current: page, total } = useAppSelector((state) => state.pagination)
 
-  const getAllOompas = async (page) => await getOompas(page)
+  const [isLoading, setIsLoading] = useState(false)
+
+  const getAllOompas = async () => {
+    setIsLoading(true)
+    try {
+      await getPageOompas(page)
+    } catch (error) {
+      console.error(error)
+    } finally {
+      setIsLoading(false)
+    }
+  }
+
+  const previousPage = () => dispatch(setPreviousPage())
+  const nextPage = () => dispatch(setNextPage())
 
   useEffect(() => {
-    getAllOompas(1).then((data) => dispatch(initOompas(data.results)))
-  }, [dispatch])
+    getAllOompas().then((data) => dispatch(getOompas(data.results)))
+  }, [dispatch, page])
 
   return (
     <Layout>
@@ -23,6 +39,25 @@ export const Home = () => {
           There are more than 100k
         </h2>
         <Grid oompas={oompas} />
+        <div className="flex flex-row justify-between pt-8 mb-4 border-t-2 border-grey-dark">
+          <button
+            className="bg-grey-dark text-white hover:bg-grey-light hover:text-grey-dark disabled:bg-gray-200  disabled:text-gray-500  font-bold py-2 px-4 rounded uppercase"
+            onClick={previousPage}
+            disabled={isLoading || page === 1}
+          >
+            Previous
+          </button>
+          <span className="text-grey-dark uppercase">
+            Page {page} of {total}
+          </span>
+          <button
+            className="bg-grey-dark text-white hover:bg-grey-light hover:text-grey-dark disabled:bg-gray-200  disabled:text-gray-500  font-bold py-2 px-4 rounded uppercase"
+            onClick={nextPage}
+            disabled={isLoading || page === total}
+          >
+            Next
+          </button>
+        </div>
       </div>
     </Layout>
   )
