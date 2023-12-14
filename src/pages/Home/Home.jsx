@@ -1,40 +1,28 @@
-import { Layout } from '@/layout'
+import { useEffect } from 'react'
 import { useAppDispatch, useAppSelector } from '@/hooks/store'
-import { decrement, increment } from '@/redux/counter/counterSlice'
+import { initOompas } from '@/redux/oompas/oompasSlice'
+import { getOompas } from '@/services'
+import { Layout } from '@/layout'
+import { Grid } from '@/components/Grid'
 
 export const Home = () => {
   const dispatch = useAppDispatch()
-  const count = useAppSelector((state) => state.counter.value)
+  const oompas = useAppSelector((state) => state.oompas)
+
+  const getAllOompas = async (page) => await getOompas(page)
+
+  useEffect(() => {
+    getAllOompas(1).then((data) => dispatch(initOompas(data.results)))
+  }, [dispatch])
 
   return (
     <Layout>
-      <div className="rounded border-2 border-yellow-500">
-        <div className="flex flex-row p-2 gap-2 justify-center">
-          <button
-            className="bg-red-500	rounded-sm p-2"
-            aria-label="Decrement value"
-            data-testid="decrement"
-            onClick={() => dispatch(decrement())}
-          >
-            - Decrement
-          </button>
-          <button
-            className="bg-lime-500	rounded-sm p-2"
-            aria-label="Increment value"
-            data-testid="increment"
-            onClick={() => dispatch(increment())}
-          >
-            + Increment
-          </button>
-        </div>
-        <div className="flex justify-center my-2">
-          <span
-            data-testid="count"
-            className="text-xl font-bold text-center rounded bg-cyan-500 p-2 w-1/4"
-          >
-            {count}
-          </span>
-        </div>
+      <div className="flex flex-col">
+        <h1 className="text-4xl mb-1 font-normal text-center">Find your Oompa Loompa</h1>
+        <h2 className="text-2xl mb-8 font-normal text-center text-grey-dark">
+          There are more than 100k
+        </h2>
+        <Grid oompas={oompas} />
       </div>
     </Layout>
   )
