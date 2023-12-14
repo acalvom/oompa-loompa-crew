@@ -2,9 +2,9 @@ import { defineConfig } from 'cypress'
 
 export default defineConfig({
   chromeWebSecurity: false,
-  requestTimeout: 10000,
+  requestTimeout: 3000,
   defaultCommandTimeout: 30000,
-  viewportWidth: 2000,
+  viewportWidth: 1500,
   viewportHeight: 942,
   numTestsKeptInMemory: 0,
   retries: {
@@ -13,7 +13,6 @@ export default defineConfig({
   },
   e2e: {
     testIsolation: true,
-    // baseUrl: 'http://localhost:3000',
     specPattern: 'cypress/e2e/**/*.cy.{js,jsx,ts,tsx}',
   },
 })
