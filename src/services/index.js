@@ -1,0 +1,1 @@
+export { getOompas } from './oompas'
