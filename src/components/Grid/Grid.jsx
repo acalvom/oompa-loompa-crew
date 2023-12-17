@@ -1,4 +1,4 @@
-import { Card } from '../Card'
+import { HomeCard } from '../HomeCard'
 
 export const Grid = ({ oompas }) => {
   return (
@@ -14,7 +14,7 @@ export const Grid = ({ oompas }) => {
           data-testid="oompa-grid"
         >
           {oompas.map((oompa) => (
-            <Card oompa={oompa} key={oompa.id} />
+            <HomeCard oompa={oompa} key={oompa.id} />
           ))}
         </div>
       )}

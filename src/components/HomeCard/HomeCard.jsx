@@ -1,7 +1,7 @@
 import { getGenderLabel } from '@/utils/gender-label'
 import { Link } from 'react-router-dom'
 
-export const Card = (props) => {
+export const HomeCard = (props) => {
   const { oompa } = props
 
   return (
@@ -22,4 +22,4 @@ export const Card = (props) => {
   )
 }
 
-export default Card
+export default HomeCard
