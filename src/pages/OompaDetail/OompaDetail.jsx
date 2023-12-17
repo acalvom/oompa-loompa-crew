@@ -38,7 +38,7 @@ export const OompaDetail = () => {
     <Layout>
       {isLoading && <Loading />}
       {!isLoading && (
-        <div className="flex flex-col">
+        <div className="flex flex-col" data-testid='oompa-details'>
           <DetailCard oompa={oompa} />
           <BackButton />
         </div>

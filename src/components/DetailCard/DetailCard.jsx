@@ -10,7 +10,7 @@ export const DetailCard = ({ oompa }) => {
         alt={oompa.first_name}
         data-testid="oompa-img"
       />
-      <div className=" lg:w-1/2">
+      <div className=" lg:w-1/2" data-testid="oompa-info">
         <div className="font-semibold text-xl mb-1">
           {oompa.first_name} {oompa.last_name}
         </div>
