@@ -4,6 +4,7 @@ export default {
   theme: {
     extend: {
       colors: {
+        'focus': '#5c6b73',
         'success-light': '#f0fe58',
         'success-main': '#c3dc06',
         'success-dark': '#a5be00',
