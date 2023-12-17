@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react'
 import { useParams, Link } from 'react-router-dom'
+import parse, { domToReact } from 'html-react-parser'
 
 import { getOompaByID } from '@/services'
 import { getGenderLabel } from '@/utils/gender-label'
@@ -56,7 +57,15 @@ export const OompaDetail = () => {
               <p className="text-sm text-grey-dark mb-0.5 italic" data-testid="oompa-profession">
                 {oompa.profession}
               </p>
-              <div className="my-5 leading-relaxed"> {oompa.description}</div>
+              <div className="my-5 leading-relaxed"> {parse(oompa.description, {replace: ({name, children})=>{
+                if(name === 'h1'){
+                  return <h1 className="text-xl mb-1 font-semibold">{domToReact(children)}</h1>
+                } 
+                else if(name === 'p'){
+                  return <p className="text-md  font-light italic">{domToReact(children)}</p>
+                }
+              }})}</div>
+
             </div>
           </div>
           <Link
