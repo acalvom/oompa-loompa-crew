@@ -19,8 +19,17 @@ export default {
         'grey-dark': '#6c757d',
       },
       minWidth: {
-        '115': '115px',
-      }
+        115: '115px',
+      },
+      width: {
+        250: '250px',
+      },
+      maxHeight: {
+        400: '400px',
+      },
+      lineClamp: {
+        10: '10',
+      },
     },
   },
   plugins: [],
