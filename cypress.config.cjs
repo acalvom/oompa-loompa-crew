@@ -12,6 +12,7 @@ export default defineConfig({
     openMode: 2,
   },
   env: {
+    appUrl: 'http://localhost:3000',
     apiUrl: 'https://2q2woep105.execute-api.eu-west-1.amazonaws.com/napptilus/oompa-loompas'
   },
   e2e: {
