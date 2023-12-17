@@ -5,4 +5,9 @@ export const getPageOompas = async (page = 1) => {
   return res.data
 }
 
-export default { getPageOompas }
+export const getOompaByID = async (id) => {
+  const res = await axios.get(`${import.meta.env.VITE_API_URL}/${id}`)
+  return res.data
+}
+
+export default { getPageOompas, getOompaByID }
