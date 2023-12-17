@@ -1,4 +1,3 @@
-
 import { getGenderLabel } from '@/utils/gender-label'
 
 export const Card = (props) => {
@@ -12,7 +11,9 @@ export const Card = (props) => {
           {oompa.first_name} {oompa.last_name}
         </div>
         <p className="text-sm text-grey-dark mb-0.5">{getGenderLabel(oompa.gender)}</p>
-        <p className="text-sm text-grey-dark mb-0.5 italic">{oompa.profession}</p>
+        <p className="text-sm text-grey-dark mb-0.5 italic" data-testid="oompa-profession">
+          {oompa.profession}
+        </p>
       </div>
     </div>
   )
