@@ -1,19 +1,33 @@
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import { useAppDispatch, useAppSelector } from '@/hooks/store'
-import { initOompas } from '@/redux/oompas/oompasSlice'
-import { getOompas } from '@/services'
+import { getOompas } from '@/redux/oompas/oompasSlice'
+import { getPageOompas } from '@/services'
 import { Layout } from '@/layout'
 import { Grid } from '@/components/Grid'
+import { Pagination } from '@/components/Pagination'
+import { Loading } from '@/components/Loading'
 
 export const Home = () => {
   const dispatch = useAppDispatch()
   const oompas = useAppSelector((state) => state.oompas)
+  const page = useAppSelector((state) => state.pagination.current)
 
-  const getAllOompas = async (page) => await getOompas(page)
+  const [isLoading, setIsLoading] = useState(false)
+
+  const getAllOompas = async () => {
+    setIsLoading(true)
+    try {
+      return await getPageOompas(page)
+    } catch (error) {
+      console.error(error)
+    } finally {
+      setIsLoading(false)
+    }
+  }
 
   useEffect(() => {
-    getAllOompas(1).then((data) => dispatch(initOompas(data.results)))
-  }, [dispatch])
+    getAllOompas().then((data) => dispatch(getOompas(data.results)))
+  }, [dispatch, page])
 
   return (
     <Layout>
@@ -22,7 +36,9 @@ export const Home = () => {
         <h2 className="text-2xl mb-8 font-normal text-center text-grey-dark">
           There are more than 100k
         </h2>
-        <Grid oompas={oompas} />
+        {isLoading && <Loading />}
+        {!isLoading && <Grid oompas={oompas} />}
+        {!isLoading && oompas.length > 0 && <Pagination />}
       </div>
     </Layout>
   )

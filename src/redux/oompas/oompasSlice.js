@@ -6,10 +6,10 @@ export const oompasSlice = createSlice({
   name: 'oompas',
   initialState,
   reducers: {
-    initOompas: (_, action) => action.payload,
+    getOompas: (_, action) => action.payload,
   },
 })
 
-export const { initOompas } = oompasSlice.actions
+export const { getOompas } = oompasSlice.actions
 
 export default oompasSlice.reducer

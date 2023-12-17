@@ -17,6 +17,9 @@ export default {
         'grey-main': '#adb5bd',
         'grey-dark': '#6c757d',
       },
+      minWidth: {
+        '115': '115px',
+      }
     },
   },
   plugins: [],
