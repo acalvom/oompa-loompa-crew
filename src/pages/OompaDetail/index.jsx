@@ -1,0 +1,1 @@
+export { OompaDetail } from './OompaDetail'
