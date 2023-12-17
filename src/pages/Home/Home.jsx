@@ -1,7 +1,8 @@
 import { useEffect, useState } from 'react'
 import { useAppDispatch, useAppSelector } from '@/hooks/store'
 import { getOompas } from '@/redux/oompas/oompasSlice'
-import { getPageOompas } from '@/services'
+import { useOompas } from '@/hooks'
+
 import { Layout } from '@/layout'
 import { Grid } from '@/components/Grid'
 import { Pagination } from '@/components/Pagination'
@@ -13,31 +14,18 @@ export const Home = () => {
   const oompas = useAppSelector((state) => state.oompas)
   const page = useAppSelector((state) => state.pagination.current)
 
-  const [isLoading, setIsLoading] = useState(false)
+  const [, oompasPage, isLoading] = useOompas({ page })
   const [search, setSearch] = useState('')
   const [filteredOompas, setFilteredOompas] = useState([])
 
-  const getAllOompas = async () => {
-    setIsLoading(true)
-    try {
-      return await getPageOompas(page)
-    } catch (error) {
-      console.error(error)
-    } finally {
-      setIsLoading(false)
-    }
-  }
-
   useEffect(() => {
-    getAllOompas().then((data) => {
-      dispatch(getOompas(data.results))
-      setFilteredOompas(data.results)
-    })
-  }, [dispatch, page])
+    dispatch(getOompas(oompasPage))
+    setFilteredOompas(oompasPage)
+  }, [dispatch, oompasPage])
 
   useEffect(() => {
     const filterOompas = () => {
-      const filteredOopmas = oompas.filter(
+      const filteredOopmas = oompasPage.filter(
         (oompa) =>
           oompa.first_name.toLowerCase().includes(search.toLowerCase()) ||
           oompa.last_name.toLowerCase().includes(search.toLowerCase()) ||
