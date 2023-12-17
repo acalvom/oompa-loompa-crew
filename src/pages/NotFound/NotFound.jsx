@@ -1,6 +1,6 @@
-import { Link } from 'react-router-dom'
 import { Layout } from '@/layout'
 import willyWonka from '@/assets/willy-wonka.png'
+import { BackButton } from '@/components/BackButton'
 
 export const NotFound = () => {
   return (
@@ -19,13 +19,7 @@ export const NotFound = () => {
           <p className="text-2xl md:text-4xl font-semibold my-4 md:text-right">
             This page does not exist
           </p>
-          <Link
-            to="/"
-            className="rounded py-2 px-4 bg-grey-light font-semibold"
-            data-testid="back-to-home"
-          >
-            Back with the Oompas
-          </Link>
+          <BackButton />
         </div>
       </div>
     </Layout>

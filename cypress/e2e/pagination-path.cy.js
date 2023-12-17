@@ -18,7 +18,7 @@ describe('Pagination path', () => {
       { fixture: 'oompasPageTwo.json' }
     ).as('getOompasPage2')
 
-    cy.visit('http://localhost:3000')
+    cy.visit(`${Cypress.env('appUrl')}`)
     cy.wait('@getOompasPage1')
   })
 

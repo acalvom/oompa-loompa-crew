@@ -10,7 +10,7 @@ describe('Filter by search workflow', () => {
       { fixture: 'oompasPageOne.json' }
     ).as('getOompasPage1')
 
-    cy.visit('http://localhost:3000')
+    cy.visit(`${Cypress.env('appUrl')}`)
     cy.wait('@getOompasPage1')
   })
 

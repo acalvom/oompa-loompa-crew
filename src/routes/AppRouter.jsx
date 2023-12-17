@@ -1,8 +1,7 @@
-
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
 import { Home } from '@/pages/Home'
 import { NotFound } from '@/pages/NotFound'
-
+import { OompaDetail } from '@/pages/OompaDetail'
 
 const routes = [
   {
@@ -13,8 +12,13 @@ const routes = [
   {
     key: 'not-found',
     path: '/*',
-    element: <NotFound />
-  }
+    element: <NotFound />,
+  },
+  {
+    key: 'oompa-detail',
+    path: 'oompa/:oompaId',
+    element: <OompaDetail />,
+  },
 ]
 
 export const AppRouter = () => {
