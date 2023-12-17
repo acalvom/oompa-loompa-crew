@@ -8,5 +8,5 @@ const tagReplacement = (name, children) =>
 
 export const parseHtml = (text) =>
   parse(text, {
-    replace: ({ name, children }) => tagReplacement(name, children),
+    replace: ({ name, children }) => name && tagReplacement(name, children),
   })
