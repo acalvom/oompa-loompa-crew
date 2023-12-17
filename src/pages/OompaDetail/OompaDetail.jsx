@@ -1,11 +1,11 @@
 import { useEffect, useState } from 'react'
 import { useParams, Link } from 'react-router-dom'
-import parse, { domToReact } from 'html-react-parser'
 
 import { getOompaByID } from '@/services'
 import { getGenderLabel } from '@/utils/gender-label'
 import { Layout } from '@/layout'
 import { Loading } from '@/components/Loading'
+import { parseHtml } from '@/utils/html-parser'
 
 export const OompaDetail = () => {
   const { oompaId } = useParams()
@@ -57,15 +57,7 @@ export const OompaDetail = () => {
               <p className="text-sm text-grey-dark mb-0.5 italic" data-testid="oompa-profession">
                 {oompa.profession}
               </p>
-              <div className="my-5 leading-relaxed"> {parse(oompa.description, {replace: ({name, children})=>{
-                if(name === 'h1'){
-                  return <h1 className="text-xl mb-1 font-semibold">{domToReact(children)}</h1>
-                } 
-                else if(name === 'p'){
-                  return <p className="text-md  font-light italic">{domToReact(children)}</p>
-                }
-              }})}</div>
-
+              <div className="my-5 leading-relaxed">{parseHtml(oompa.description)}</div>
             </div>
           </div>
           <Link
