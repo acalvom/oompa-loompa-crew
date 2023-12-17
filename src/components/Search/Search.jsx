@@ -1,6 +1,6 @@
-import search from '@/assets/search.png'
+import searchIcon from '@/assets/search.png'
 
-export const Search = ({setSearch}) => {
+export const Search = ({ setSearch }) => {
   return (
     <div className="flex flex-row relative w-56 my-3 mr-0 ml-auto">
       <input
@@ -9,13 +9,15 @@ export const Search = ({setSearch}) => {
         placeholder="Search"
         onChange={(e) => setSearch(e.target.value)}
         required
+        data-testid="search-input"
       />
       <div className="absolute top-0 end-0 p-2.5 text-sm font-medium h-full text-white rounded-e-lg border ">
         <img
-          src={search}
+          src={searchIcon}
           alt="Search Oompa"
           className="w-5 h-5 text-grey-main"
           aria-hidden="true"
+          data-testid="search-icon"
         />
       </div>
     </div>
