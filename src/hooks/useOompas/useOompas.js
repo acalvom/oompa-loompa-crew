@@ -44,5 +44,5 @@ export const useOompas = ({ page = 1, oompaId = 1 }) => {
     getOompa().then((data) => setOompa(data))
   }, [oompaId])
 
-  return [oompa, oompas, isLoading]
+  return { oompa, oompas , isLoading }
 }

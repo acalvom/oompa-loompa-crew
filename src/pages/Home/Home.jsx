@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 import { useAppDispatch, useAppSelector } from '@/hooks/store'
 import { getOompas } from '@/redux/oompas/oompasSlice'
-import { useOompas } from '@/hooks'
+import { useOompas } from '@/hooks/useOompas'
 
 import { Layout } from '@/layout'
 import { Grid } from '@/components/Grid'
@@ -14,7 +14,7 @@ export const Home = () => {
   const oompas = useAppSelector((state) => state.oompas)
   const page = useAppSelector((state) => state.pagination.current)
 
-  const [, oompasPage, isLoading] = useOompas({ page })
+  const { oompas: oompasPage, isLoading } = useOompas({ page })
   const [search, setSearch] = useState('')
   const [filteredOompas, setFilteredOompas] = useState([])
 
