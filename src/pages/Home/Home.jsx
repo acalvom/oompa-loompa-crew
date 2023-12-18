@@ -1,6 +1,5 @@
 import { useEffect, useState } from 'react'
-import { useAppDispatch, useAppSelector } from '@/hooks/store'
-import { getOompas } from '@/redux/oompas/oompasSlice'
+import { useAppSelector } from '@/hooks/store'
 import { useOompas } from '@/hooks/useOompas'
 
 import { Layout } from '@/layout'
@@ -10,22 +9,17 @@ import { Loading } from '@/components/Loading'
 import { Search } from '@/components/Search'
 
 export const Home = () => {
-  const dispatch = useAppDispatch()
-  const oompas = useAppSelector((state) => state.oompas)
   const page = useAppSelector((state) => state.pagination.current)
 
-  const { oompas: oompasPage, isLoading } = useOompas({ page })
+  const { oompas, isLoading } = useOompas({ page })
   const [search, setSearch] = useState('')
   const [filteredOompas, setFilteredOompas] = useState([])
 
-  useEffect(() => {
-    dispatch(getOompas(oompasPage))
-    setFilteredOompas(oompasPage)
-  }, [dispatch, oompasPage])
+  useEffect(() => setFilteredOompas(oompas), [oompas])
 
   useEffect(() => {
     const filterOompas = () => {
-      const filteredOopmas = oompasPage.filter(
+      const filteredOopmas = oompas.filter(
         (oompa) =>
           oompa.first_name.toLowerCase().includes(search.toLowerCase()) ||
           oompa.last_name.toLowerCase().includes(search.toLowerCase()) ||

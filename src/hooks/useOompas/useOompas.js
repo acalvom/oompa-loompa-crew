@@ -1,17 +1,22 @@
 import { useState, useEffect } from 'react'
 import { getPageOompas, getOompaByID } from '@/services'
+import { useAppDispatch, useAppSelector } from '@/hooks/store'
+import { getOompas } from '@/redux/oompas/oompasSlice'
 
-export const useOompas = ({ page = 1, oompaId = 1 }) => {
+export const initialOompa = {
+  first_name: '',
+  last_name: '',
+  profession: '',
+  image: '',
+  description: '',
+  gender: '',
+}
+
+export const useOompas = ({ page , oompaId }) => {
+  const dispatch = useAppDispatch()
+  const oompas = useAppSelector((state) => state.oompas)
   const [isLoading, setIsLoading] = useState(false)
-  const [oompas, setOompas] = useState([])
-  const [oompa, setOompa] = useState({
-    first_name: '',
-    last_name: '',
-    profession: '',
-    image: '',
-    description: '',
-    gender: '',
-  })
+  const [oompa, setOompa] = useState(initialOompa)
 
   const getAllOompas = async () => {
     setIsLoading(true)
@@ -37,12 +42,12 @@ export const useOompas = ({ page = 1, oompaId = 1 }) => {
   }
 
   useEffect(() => {
-    getAllOompas().then((data) => setOompas(data))
-  }, [page])
+    page && getAllOompas().then((data) => dispatch(getOompas(data)))
+  }, [dispatch, page])
 
   useEffect(() => {
-    getOompa().then((data) => setOompa(data))
+    oompaId && getOompa().then((data) => setOompa(data))
   }, [oompaId])
 
-  return { oompa, oompas , isLoading }
+  return { oompa, oompas, isLoading }
 }
