@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
-import { useAppDispatch, useAppSelector } from '@/hooks/store'
-import { getOompas } from '@/redux/oompas/oompasSlice'
-import { getPageOompas } from '@/services'
+import { useAppSelector } from '@/hooks/store'
+import { useOompas } from '@/hooks/useOompas'
+
 import { Layout } from '@/layout'
 import { Grid } from '@/components/Grid'
 import { Pagination } from '@/components/Pagination'
@@ -9,31 +9,13 @@ import { Loading } from '@/components/Loading'
 import { Search } from '@/components/Search'
 
 export const Home = () => {
-  const dispatch = useAppDispatch()
-  const oompas = useAppSelector((state) => state.oompas)
   const page = useAppSelector((state) => state.pagination.current)
 
-  const [isLoading, setIsLoading] = useState(false)
+  const { oompas, isLoading } = useOompas({ page })
   const [search, setSearch] = useState('')
   const [filteredOompas, setFilteredOompas] = useState([])
 
-  const getAllOompas = async () => {
-    setIsLoading(true)
-    try {
-      return await getPageOompas(page)
-    } catch (error) {
-      console.error(error)
-    } finally {
-      setIsLoading(false)
-    }
-  }
-
-  useEffect(() => {
-    getAllOompas().then((data) => {
-      dispatch(getOompas(data.results))
-      setFilteredOompas(data.results)
-    })
-  }, [dispatch, page])
+  useEffect(() => setFilteredOompas(oompas), [oompas])
 
   useEffect(() => {
     const filterOompas = () => {

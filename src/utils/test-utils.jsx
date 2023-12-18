@@ -1,11 +1,13 @@
-import { render } from '@testing-library/react'
+import { render, renderHook } from '@testing-library/react'
 import { Provider } from 'react-redux'
 import { store } from '../redux/store'
 
-export function renderWithProviders(ui, { ...renderOptions } = {}) {
-  function Wrapper({ children }) {
-    return <Provider store={store}>{children}</Provider>
-  }
+export const renderWithProviders = (element, type = 'ui', { ...renderOptions } = {}) => {
+  const Wrapper = ({ children }) => <Provider store={store}>{children}</Provider>
 
-  return { store, ...render(ui, { wrapper: Wrapper, ...renderOptions }) }
+  if (type === 'ui') {
+    return { store, ...render(element, { wrapper: Wrapper, ...renderOptions }) }
+  } else if (type === 'hook') {
+    return { store, ...renderHook(element, { wrapper: Wrapper, ...renderOptions }) }
+  }
 }
