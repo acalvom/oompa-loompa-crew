@@ -7,11 +7,20 @@ export default defineConfig({
   plugins: [react()],
   server: {
     open: true,
+    host: true,
+    strictPort: true,
     port: 3000,
   },
   resolve: {
     alias: {
       '@': path.resolve(__dirname, './src'),
+    },
+  },
+  build: {
+    rollupOptions: {
+      input: {
+        main: path.resolve(__dirname, './src/main.jsx'),
+      },
     },
   },
   test: {
