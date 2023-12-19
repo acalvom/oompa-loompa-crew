@@ -1,85 +1,83 @@
-# 💻 Code Challenge 〰️ Oompa Loompa Crew
+# 💻 Oompa Loompa Crew  🍫
 
-> Code challenge proposed by Napptilus -
-> Andrea Calvo Moreno
->
-> This repository contains the frontend code of the application.  
->  La gestión del proyecto se ha realizado siguiendo metodología ágil tipo Kanban en GitHub y Pull Requests. El tablero se encuentra aquí.
+> Code challenge proposed by Napptilus - By Andrea Calvo Moreno
 
-## 🎯 Minimum requirements
+This repository contains the frontend code for the application. Project management has been carried out using Agile Kanban methodology on GitHub, with the project board available [here](https://github.com/users/acalvom/projects/1/views/1).
 
-- Home page displays the list of Oompa Loompas that are available by `?page=`.
-- Pagination needs to be considered.
-- Home page is provided with a search input to filter imnediately the Oompas by profession, first name and last name.
-- Oompa Loompa details are displayed in a new page with a few more information.
-- Oompa Loompa description cannot be escaped
-- When clicking in the navbar icon, the user is redirected to Home page.
-- Responsive design for mobile and tablet.
-- Use of `react-redux` and `react-router` is mandatory
+## 🎯 Minimum Requirements
 
-## ➕ App improvements:
+- The home page displays the list of available Oompa Loompas using the `?page=` parameter.
+- Pagination functionality needs to be implemented.
+- The home page includes a search input to immediately filter Oompas by profession, first name, and last name.
+- Clicking on an Oompa Loompa card leads to a new page with more detailed information.
+- The Oompa Loompa description cannot be escaped.
+- Clicking the navbar icon redirects the user to the home page.
+- Implement responsive design for mobile and tablet devices.
+- Mandatory use of `react-redux` and `react-router`.
 
-- Custom favicon
-- Custom hook to handle Oompas Loompas
-- Not Found page
-- Unit tests for components with `React Testing Library` and `Vitest`
-- Slice tests for store reducers with with `React Testing Library`
-- Hook test for custom Oompa Loompa Hook with `React Testing Library`
-- E2E tests with `Cypress 12` suite for app workflows
-- Linters and guards like `husky`, `commitlint`, `eslint` and `prettier`
+## ➕ App Improvements:
 
-## 🧭 Technical decisions:
+- Custom favicon.
+- Custom hook to handle Oompa Loompas.
+- Not Found page.
+- Unit tests for components using `React Testing Library` and `Vitest`.
+- Slice tests for store reducers with `React Testing Library`.
+- Hook tests for the custom Oompa Loompa Hook using `React Testing Library`.
+- E2E tests with `Cypress 12` suite for app workflows.
+- Incorporate linters and guards like `husky`, `commitlint`, `eslint`, and `prettier`.
 
-1. The infinite scroll will took me too much time to be implemented and since I had to prioritise other tasks I replace this feature by adding a pagination system to move back and forward toward the pages.
+## 🧭 Technical Decisions:
 
-2. I did not have previous experience with Redux caché, and even thought I assigned a ticket to investigate this functionality with `RTK Query` to store the store status for one day I finally did not have time to implement it
+1. Implementing infinite scroll would have taken too much time. Instead, I prioritized other tasks and added a pagination system to navigate through pages.
 
-## 🫀 How it works
+2. Due to a lack of experience with Redux cache and time constraints, I couldn't implement this functionality using `RTK Query` to store the store status.
 
-Once the app is running, the user is seeing the Home page, where a list of the first 25 Oompas is displayed (the first page according to the endpoint `?page=1`).
+## 🫀 How It Works
 
-To see more Oompas, the user will scroll down until the end of the page and click on `Next` button. If the page is the first one, the `Previous` button is disabled, if the page is the last one, number 20, the `Next` button is disabled.
+Once the app is running, the user sees the home page displaying the first 25 Oompas, corresponding to `?page=1`.
 
-When clicking on an Oompa card, the user is redirected to the details for this Oompa. In this page, the Oompa description is provided by the API with `html` characters, so this text has been interpreted and styled according to the app theme.
+To view more Oompas, the user scrolls down and clicks the `Next` button. If on the first page, the `Previous` button is disabled; if on the last page (number 20), the `Next` button is disabled.
 
-To go back to Home menu, the user can click on the navbar, or in the button `Back with the Oompas` to be redirected to main view
+Clicking on an Oompa card redirects the user to the details for that Oompa. Here, the Oompa description is provided by the API with `html` characters, styled according to the app theme.
 
-If the user tries to access to a non existing page, it will be redirected to a `Not Found` page. By clicking on `Back with the Oompas` button, the user will get to Home page
+To return to the home menu, the user can click on the navbar or the `Back with the Oompas` button to return to the main view.
 
-## ⚙️ Tech stack
+If the user attempts to access a non-existing page, they will be redirected to a `Not Found` page. Clicking the `Back with the Oompas` button returns the user to the home page.
+
+## ⚙️ Tech Stack
 
 ▪️ `Git` `GitHub` `Docker` `Vite` `Vercel`  
 ▪️ `React` `Javascript` `Tailwind` `Axios` `Redux` `React-Redux` `React-Router`  
 ▪️ `Cypress 12` `React Testing Library` `Vitest`
 
-### 👣 A little further on:
+### 👣 A Little Further On:
 
-- App development has been tracked with a [Kanban project](https://github.com/users/acalvom/projects/1) in Github
-- With this, tickets associated with the requirements and app features have been created and labelled based on the priority:
-  - 🔴 P0: Hight Priority
+- App development progress has been tracked with a [Kanban project](https://github.com/users/acalvom/projects/1) on Github.
+- Tickets associated with requirements and app features have been created and labeled based on priority:
+  - 🔴 P0: High Priority
   - 🟠 P1: Mid Priority
   - 🟡 P2: Low Priority
-- Three boards are displayed on the board where tickets rotate according to the status of their resolution: To do, In progress and Done.
+- Three boards (To do, In progress, and Done) display tickets based on their resolution status.
 - Workflow:
   - `git` has been used to handle the workflow and version control.
-  - A main workflow associated with `main` branch is established, and on this branch, the finished tickets are merged into via `pull requests`.
-  - These tickets are associated to branches following the `feat/xxx` `test/yyy` patterns
-  - Once the ticket is resolved, the branch with the resolved issue is merged with `main` from a `pull request` with `squash` approach.
+  - A main workflow associated with the `main` branch is established, and finished tickets are merged into it via `pull requests`.
+  - Ticket branches follow the `feat/xxx` and `test/yyy` patterns.
+  - Once a ticket is resolved, the branch with the resolved issue is merged with `main` using a `pull request` with a `squash` approach.
 
 ## 🏁 **Getting Started**
 
-### 🛠 **System requirements**
+### 🛠 **System Requirements**
 
 - `node: v18`
 - `npm: v8`
 
-### 🏗 **Project installation**
+### 🏗 **Project Installation**
 
 ```bash
 # Clone this repository
 $ git clone https://github.com/acalvom/oompa-loompa-crew.git
 
-# Go into the repository
+# Navigate to the repository
 $ cd oompa-loompa-crew
 ```
 
@@ -97,19 +95,19 @@ $ npm run dev
 
 ➡️ **_Option 🅱️: Run in Docker_**
 
-⚠️ Note that you need to have Docker installed on your machine
+⚠️ Note: Docker must be installed on your machine.
 
 ```bash
-# Build the Docker image with the name `oompa-loompa-crew`. It might take some time
-$ oompa-loompa-crew > docker build -t oompa-loompa-crew .
+# Build the Docker image with the name `oompa-loompa-crew`. This might take some time.
+$ docker build -t oompa-loompa-crew .
 
-# Check the created image is available
+# Check the created image
 $ docker image ls
 
-# Run the image `oompa-loompa-crew` in the container `oompa-loompa-crew-container` exposing the port 3000
-$ docker run --name oompa-loompa-crew-container  -p 3000:3000 -d oompa-loompa-crew
+# Run the image `oompa-loompa-crew` in the container `oompa-loompa-crew-container`, exposing port 3000
+$ docker run --name oompa-loompa-crew-container -p 3000:3000 -d oompa-loompa-crew
 
-# Go to `http://localhost:3000/`. The app is running in the Docker container
+# Open `http://localhost:3000/` to access the app running in the Docker container
 ```
 
 ### 🧾 Hightlighted scripts in `package.json`
@@ -128,11 +126,9 @@ $ npm run test
 $ npm run cy:open
 ```
 
-## ☁ Vercel deployment
+### [☁ Vercel deployment](https://oompa-loompa-crew.vercel.app/)
 
-🔗 [Oompa Loompa Crew](https://oompa-loompa-crew.vercel.app/)
-
-## 🫂 **You can reach me at:**
+### 🫂 **You can reach me at:**
 
 <!-- ALL-CONTRIBUTORS-LIST:START - Do not remove or modify this section -->
 <!-- prettier-ignore-start -->
